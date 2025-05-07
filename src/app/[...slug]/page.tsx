@@ -4,8 +4,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 
-import { catergoriesSlug, filterItems } from "@constants";
-import CatergoriesItems from "@components/Catergories/CatergoriesItems";
+import { catergoriesSlug, filterItems } from "@constants/index.js";
+import CatergoriesItems from "@components/Categories/CategoriesItems";
 import ShopCarouselImgs from "@components/Home/shopCarouselImg/shopCarouselImgs";
 
 // Type for Price Range

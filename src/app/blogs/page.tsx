@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { blogPost,socialMediaBlogs } from "@constants";
+import { blogPost,socialMediaBlogs } from "@constants/index.js";
 const Blogs = () => {
   return (
     <div className="container px-4">

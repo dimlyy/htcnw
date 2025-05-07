@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { cartItems } from "@constants";
+import { cartItems } from "@constants/index.js";
 const Cart = () => {
     const [itemsCart, setItemsCart] = useState(cartItems.map(item => ({...item})));
 

@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -18,22 +19,16 @@
         "name": "next"
       }
     ],
+    "baseUrl": "src",
     "paths": {
-      "@*": ["./src/*"]
+      "@/*": ["*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@utils/*": ["utils/*"],
+      "@styles/*": ["styles/*"],
+      "@context/*": ["context/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/Home/videoCarousel",
-    "src/constants/index.js",
-    "src/utils/index.js",
-    "src/components/Home/Modal/Modal.jsx",
-    "src/components/Home/Light/Light.jsx",
-    "src/components/Home/Iphone/Iphone.jsx",
-    "src/components/Home/Modal/Modal3D.jsx"
-  ],
+  "include": ["next-env.d.ts", "src", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

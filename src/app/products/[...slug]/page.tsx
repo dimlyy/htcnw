@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { collectionsItems } from '@constants';
+import { collectionsItems } from '@constants/index.js';
 import Gallery from '@components/SingleProduct/Gallery';
-import { singleProduct } from '@constants';
+import { singleProduct } from '@constants/index.js';
 import ProductRelate from '@components/SingleProduct/ProductRelate';
-import { promotionData } from '@constants';
+import { promotionData } from '@constants/index.js';
 import ProductDescription from '@components/SingleProduct/ProductDescription';
 import ShopCarouselImgs from '@components/Home/shopCarouselImg/shopCarouselImgs';
 

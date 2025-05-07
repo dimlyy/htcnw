@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { cartItems } from "@constants";
+import { cartItems } from "@constants/index.js";
 
 const Checkout = () => {
   const [itemsCart, setItemsCart] = useState(
