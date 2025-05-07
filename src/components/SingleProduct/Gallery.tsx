@@ -7,7 +7,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 
-import { fatherProduct, shopHighlight } from "@constants";
+import { fatherProduct, shopHighlight } from "@constants/index.js";
 
 interface GalleryProps {
   product: {
