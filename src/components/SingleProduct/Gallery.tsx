@@ -9,12 +9,26 @@ import Link from "next/link";
 
 import { fatherProduct, shopHighlight } from "@constants/index.js";
 
+interface Variant {
+  id: number;
+  color: string;
+  discountPrice?: number;
+  price: number;
+  imgs: string[];
+  discount: boolean;
+}
+
+interface FatherProduct {
+  capacity: string;
+  slug: string;
+}
+
 interface GalleryProps {
   product: {
     label: string;
     short: string;
-    fatherProduct: [];
-    varients: [];
+    fatherProduct: FatherProduct[]; // Father products array
+    varients: Variant[]; // Variants array
   };
 }
 
@@ -42,8 +56,8 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
   };
 
   return (
-   <div className="flex md:flex-row flex-col container mt-5">
-        {/* Img Gallery */}
+    <div className="flex md:flex-row flex-col container mt-5">
+      {/* Img Gallery */}
       <div className="md:w-5/12 w-full relative flex flex-col items-center mb-5 px-10">
         <div className="w-11/12 max-w-full relative overflow-hidden">
           {/* Product Carousel */}
@@ -58,7 +72,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
               />
             </div>
           </div>
-  
+
           {/* Button Prev and Next*/}
           <button
             onClick={handleOnNext}
@@ -67,7 +81,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
           >
             <i className="text-4xl uil uil-angle-right text-[var(--title-color)]" />
           </button>
-  
+
           <button
             onClick={handleOnPrev}
             className="absolute left-2 top-1/2 w-8 h-8"
@@ -75,7 +89,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             <i className="text-4xl uil uil-angle-left text-[var(--title-color)]" />
           </button>
         </div>
-  
+
         <div className="h-20 flex flex-row mt-5">
           {currentProduct.imgs.map((item, index) => (
             <Image
@@ -84,13 +98,16 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
               src={item}
               width={400}
               height={400}
-              className={classNames("w-20 mx-3 rounded-2xl p-2 cursor-pointer", {
-                "border-white border": index === currentImg,
-              })}
+              className={classNames(
+                "w-20 mx-3 rounded-2xl p-2 cursor-pointer",
+                {
+                  "border-white border": index === currentImg,
+                }
+              )}
             />
           ))}
         </div>
-  
+
         {/* Information  */}
         <div className="flex flex-row gap-4 mt-6">
           <Link href="#" className="flex flex-col w-14 text-center group">
@@ -101,7 +118,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
               Điểm nổi bật
             </span>
           </Link>
-  
+
           <Link href="#" className="flex flex-col w-14 text-center group">
             <div className="flex items-center justify-center w-full h-14 bg-gray-300 rounded-2xl">
               <i className="uil uil-slack-alt text-3xl text-[var(--title-color)]" />
@@ -110,7 +127,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
               Điểm nổi bật
             </span>
           </Link>
-  
+
           <Link href="#" className="flex flex-col w-14 text-center group">
             <div className="flex items-center justify-center w-full h-14 bg-gray-300 rounded-2xl">
               <i className="uil  uil-blogger-alt text-3xl text-[var(--title-color)]" />
@@ -120,7 +137,6 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             </span>
           </Link>
         </div>
-  
       </div>
 
       {/* Product Price */}
@@ -138,7 +154,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             />
           </div>
         </div>
-  
+
         {/* Rating Stars */}
         <div className="flex items-center my-2 ">
           {[...Array(5)].map((_, index) => (
@@ -152,7 +168,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
           ))}
           <span className="text-gray-500 ml-3">5 đánh giá</span>
         </div>
-  
+
         {/*Price  */}
         {currentProduct.discountPrice ? (
           <div className="mt-4 flex flex-row items-center">
@@ -170,7 +186,7 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             </span>
           </div>
         )}
-  
+
         {/* Father Varients */}
         <div className="flex flex-row mt-5 h-11">
           {fatherProduct.map((item, index) => (
@@ -198,13 +214,13 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             </div>
           ))}
         </div>
-  
+
         {/* Product Varients */}
         <div className="flex flex-col mt-5">
           <span className="text-[var(--text-color)]">
             Chọn màu để xem giá và tình trạng hàng
           </span>
-  
+
           <div className="flex flex-row mt-2 h-11">
             {product.varients.map((item, index) => (
               <div
@@ -216,8 +232,8 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
                     : "border-[var(--text-color)]"
                 )}
                 onClick={() => {
-                  setCurrent(index)
-                  setCurrentImg(0)
+                  setCurrent(index);
+                  setCurrentImg(0);
                 }}
               >
                 <button>
@@ -239,49 +255,60 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
 
         {/* Add to Cart Button */}
         <div className="flex flex-col mt-6 w-full">
-            <div className="flex flex-row">
-              <div className="w-1/2 uppercase cursor-pointer bg-red-500 rounded-xl text-center mr-2 text-white py-3">
-                Mua ngay
-              </div>
-              <div className="w-1/2 uppercase cursor-pointer bg-red-300 rounded-xl text-center text-white py-3 items-center">
-                Thêm vào giỏ hàng
-              </div>
+          <div className="flex flex-row">
+            <div className="w-1/2 uppercase cursor-pointer bg-red-500 rounded-xl text-center mr-2 text-white py-3">
+              Mua ngay
             </div>
+            <div className="w-1/2 uppercase cursor-pointer bg-red-300 rounded-xl text-center text-white py-3 items-center">
+              Thêm vào giỏ hàng
+            </div>
+          </div>
 
-            <div className="flex flex-row mt-5">
-              <div className="w-full uppercase cursor-pointer bg-blue-400 rounded-xl text-center text-white py-3">
-                Trả góp 0%
-              </div>
+          <div className="flex flex-row mt-5">
+            <div className="w-full uppercase cursor-pointer bg-blue-400 rounded-xl text-center text-white py-3">
+              Trả góp 0%
             </div>
-            <div>
-
-            
-            </div>
+          </div>
+          <div></div>
         </div>
 
         {/* Social Media */}
         <div className="flex flex-row mt-5 gap-3">
-            <a target="_blank" href="https://www.facebook.com/anh.duong.135488/" className="rounded-full flex items-center justify-center w-8 h-8 bg-blue-500">
-              <i className="uil uil-facebook-f text-2xl text-white"></i>
-            </a>
+          <a
+            target="_blank"
+            href="https://www.facebook.com/anh.duong.135488/"
+            className="rounded-full flex items-center justify-center w-8 h-8 bg-blue-500"
+          >
+            <i className="uil uil-facebook-f text-2xl text-white"></i>
+          </a>
 
-            <a target="_blank" href="https://www.instagram.com/dimlyyyyy/" className="rounded-full flex items-center justify-center w-8 h-8 bg-violet-500">
-              <i className="uil uil-instagram text-2xl text-white"></i>
-            </a>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/dimlyyyyy/"
+            className="rounded-full flex items-center justify-center w-8 h-8 bg-violet-500"
+          >
+            <i className="uil uil-instagram text-2xl text-white"></i>
+          </a>
 
-            <a target="_blank" href="tel:0378808834" className="rounded-full flex items-center justify-center w-8 h-8 bg-green-600">
-              <i className="uil uil-phone text-2xl text-white"></i>
-            </a>
+          <a
+            target="_blank"
+            href="tel:0378808834"
+            className="rounded-full flex items-center justify-center w-8 h-8 bg-green-600"
+          >
+            <i className="uil uil-phone text-2xl text-white"></i>
+          </a>
         </div>
       </div>
 
       {/* Shop Highlight */}
       <div className="flex-grow mt-4 md:mt-0 mx-3 ml-7 flex flex-col items-center bg-pink-100 rounded-2xl">
         <a
-        href="https://www.facebook.com/anh.duong.135488/" 
-        target="_blank"
-        className="py-2 px-4 bg-pink-200 mt-4 text-[var(--title-color-dark)] rounded-2xl"
-        >Liên hệ ngay</a>
+          href="https://www.facebook.com/anh.duong.135488/"
+          target="_blank"
+          className="py-2 px-4 bg-pink-200 mt-4 text-[var(--title-color-dark)] rounded-2xl"
+        >
+          Liên hệ ngay
+        </a>
 
         <ul className="my-4 text-[var(--title-color)] mx-5 list-disc">
           {shopHighlight.map((item, index) => (
@@ -290,17 +317,17 @@ const Gallery: React.FC<GalleryProps> = ({ product }) => {
             </li>
           ))}
         </ul>
-       <div className="w-full">
-            <Image
+        <div className="w-full">
+          <Image
             alt="free-ship"
             width={400}
             height={400}
             src="/assets/images/free-ship.jpg"
             className="object-contain max-w-full rounded-2xl"
-            />
-       </div>
+          />
+        </div>
+      </div>
     </div>
-   </div>
   );
 };
 
